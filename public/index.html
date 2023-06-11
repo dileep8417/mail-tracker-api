@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mail Tracker</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+    <div class="nav">Mail Tracker</div>
+    <div class="container">
+        <div class="section">
+            <div class="heading">About</div>
+            <div class="content">
+                This is a mail tracking API to know whether the sent mail is opened by recipient or links in the mail or shared links clicked.
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="heading">Instructions</div>
+            <h4>Tracking mail usage</h4>
+            <ul>
+                <li>Generate link</li>
+                <li>In Gmail or other mail platforms insert this link as <b>external image link</b></li>
+            </ul>
+            <br>
+            <h4>Tracking link clicks usage</h4>
+            <ul>
+                <li>Generate link</li>
+                <li>Use the generated link in place of link want to track</li>
+            </ul>
+            <br>
+        </div>
+
+        <div class="heading" style="margin: 24px 0 0">Routes</div>
+        <div class="section details-container">
+            <div class="request-card">
+                <div class="route">/mailTracking</div>
+                <div class="req-body">
+                    <div class="method"><b>Method:</b> /GET</div>
+                    <div>
+                        <button id="mailTracking">Generate Mail Tracking Link</button>
+                    </div>
+                </div>
+                <div class="response">
+                    <div class="resp-head">Response:</div>
+                    <div id="mailTrackingResponse" class="resp-body"></div>
+                </div>
+            </div>
+
+            <div class="request-card">
+                <div class="route">/linkClickTracking?link=https://url-you-want-to-track</div>
+                <div class="req-body">
+                    <div class="method"><b>Method:</b> /GET</div>
+                    <form>
+                        <input id="redirectLink" type="url" placeholder="Link to track"> <button id="getTrackingLink">Generate Trackable Link</button>
+                    </form>
+                </div>
+                <div class="response">
+                    <div class="resp-head">Response:</div>
+                    <div id="redirectLinkResponse" class="resp-body"></div>
+                </div>
+            </div>
+
+            <div class="request-card">
+                <div class="route">/track/stats?link=https:link-you-generated-for-tracking</div>
+                <div class="req-body">
+                    <div class="method"><b>Method:</b> /GET</div>
+                    <form>
+                        <input id="trackingLink" type="url" placeholder="Generated tracking link"> <button id="getTrackingStats">Get Tracking Stats</button>
+                    </form>
+                </div>
+                <div class="response">
+                    <div class="resp-head">Response:</div>
+                    <div id="trackingLinkResponse" class="resp-body"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <footer>
+        &copy; Dileep 2023
+    </footer>
+</body>
+</html>
+
+<script src="./js/main.js"></script>
