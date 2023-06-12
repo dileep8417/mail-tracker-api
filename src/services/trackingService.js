@@ -1,6 +1,6 @@
 const TrackingStatsModel = require('../models/trackingStats');
 const TrackerModel = require('../models/tracker');
-const { isValidToken } = require('../utils');
+const { isValidToken, getCurrentDatTime } = require('../utils');
 
 const getValidTrackerFromToken = async (token, trackerType = null) => {
     if (!isValidToken(token)) {
@@ -52,7 +52,7 @@ const createOrUpdateTrackingStats = async (tracker) => {
 
     if (typeof trackingStats !== 'undefined') {
         // Updates existing object
-        await updateTrackingStats(trackingStats);
+        await updateTrackingStats(trackingStats, tracker.trackerType);
         return;
     }
     
@@ -63,21 +63,23 @@ const createOrUpdateTrackingStats = async (tracker) => {
 }
 
 const createTrackingStats = (tracker) => {
-    const currentDate = Date.now();
+    const currentDate = getCurrentDatTime();
     const dataToInsert = {
         tracker: tracker
     };
 
-    if (tracker.type !== 'mail') {
+    dataToInsert.trackCount = 1;
+    if (tracker.trackerType === 'mail') {
+        dataToInsert.mailOpenedAt = currentDate;
+    } else {
         dataToInsert.lastClickedAt = currentDate;
-        dataToInsert.trackCount = 1;
     }
 
     return TrackingStatsModel.create(dataToInsert);
 }
 
 const updateTrackingStats = (trackingStats, trackerType) => {
-    const currentDate = Date.now();
+    const currentDate = getCurrentDatTime();
 
     trackingStats.trackCount += 1;
     if (trackerType === 'mail') {

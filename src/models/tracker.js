@@ -1,3 +1,4 @@
+const { getCurrentDatTime } = require('../utils');
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
@@ -18,12 +19,12 @@ const trackerSchema = new Schema({
     },
     linkToTrack: String,
     createdAt: {
-        type: Date,
-        default: () => Date.now(),
+        type: String,
+        default: getCurrentDatTime,
     },
     lastUpdatedAt: {
-        type: Date,
-        default: () => Date.now(),
+        type: String,
+        default: getCurrentDatTime,
     },
     trackingStats: {
         type: Schema.Types.ObjectId,

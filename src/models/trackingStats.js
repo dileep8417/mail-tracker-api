@@ -6,9 +6,9 @@ const trackingStatsSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Tracker',
     },
-    mailOpenedAt: Date,
-    mailLastOpenedAt: Date,
-    lastClickedAt: Date,
+    mailOpenedAt: String,
+    mailLastOpenedAt: String,
+    lastClickedAt: String,
     isLinkClicked: Boolean,
     trackCount: {
         type: Number,
